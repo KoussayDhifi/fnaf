@@ -5,7 +5,7 @@ using namespace std;
 
 class Animatronic {
 	public:
-		Animatronic (string nameS, int rageA) {
+		Animatronic (string nameS, double rageA) {
 			name = nameS;
 			rage = rageA;
 		}
@@ -19,7 +19,7 @@ class Animatronic {
 
 		}
 
-		void incRage(int r) {
+		void incRage(double r) {
 			rage = rage+r;
 		}
 
