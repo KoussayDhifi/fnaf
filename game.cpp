@@ -20,6 +20,15 @@ class Animat {
 		}
 
 		int getPos () {
+			if (rage<2.5) {
+				position = 1;
+
+			}else if (rage>=2.5 && rage<3.5) {
+				position = 2;
+			}else {
+				position = 3;
+			}
+
 			return position;
 		}
 
@@ -27,6 +36,11 @@ class Animat {
 			return noj;
 
 		}
+
+		int getA () {
+			return A_noj;
+		}
+
 
 		string getName () {
 			return name;
@@ -37,6 +51,10 @@ class Animat {
 			rage = rage+r;
 		}
 
+		void IncNoj (int k) {
+			A_noj += k;
+		}
+
 
 
 	private:
@@ -44,6 +62,7 @@ class Animat {
 		double rage;
 		int noj;
 		int position;
+		int A_noj = 0;
 };
 
 
@@ -155,21 +174,51 @@ int main () {
 						}
 						break;
 					case 6:
-						if (bonnie.getPos() == 2) {
+						if (bonnie.getPos() == 3) {
 							cout << "Bonnie is on the left door \n";
 						}else {
 							cout << "No one is here \n";
 						}
 						break;
-					default:
-						continue;
+					case 7:
+						cout << "You've done nothing \n";
 						break;
 
 
 					} //End of switch statement
 
+					if (chicka.getPos() == 3) {
+						if (right_door) {
+							chicka.IncNoj(1);
+						}else {
+							chicka.IncNoj(-1);
+							chicka.IncRage(-0.5);
+						}
+					}else {
+						chicka.IncRage(0.75);
+					}
+					if (bonnie.getPos() == 3)
+					{
+						if (left_door) {
+							bonnie.IncNoj(1);
+						}else {
+							bonnie.IncNoj(-1);
+							bonnie.IncRage(-0.25);
+						}
+					}else {
+						bonnie.IncRage(0.5);
+					}
 
+					if (chicka.getA() == chicka.getNoj()) {
+						cout << "Chicka Jumped and killed ya... \n";
+						lost = true;
+					}
+					if (bonnie.getA() == bonnie.getNoj()) {
+						cout << "Bonnie Killed ya... \n";
+						lost = true;
+					}
 
+					
 
 				}
 				break;
